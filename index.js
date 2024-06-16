@@ -4,6 +4,7 @@ import { adminRouter } from "./Routes/AdminRoute.js";
 import { EmployeeRouter } from "./Routes/employeeRouter.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
+import "dotenv/config";
 
 const app = express();
 app.use(express.json());
@@ -39,6 +40,8 @@ const verifyUser = (req, res, next) => {
 app.get("/verify", verifyUser, (req, res) => {
   return res.json({ Status: true, role: req.role, id: req.id });
 });
-app.listen(8182, () => {
+
+const port = process.env.PORT || 8182;
+app.listen(port, () => {
   console.log("Server is running");
 });
