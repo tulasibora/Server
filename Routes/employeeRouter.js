@@ -4,7 +4,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const router = express.Router();
 
-////////////Validate the User
+//////////// Validate the User from the EMPLOYEE table /////
+
 router.post("/employeelogin", (req, res) => {
   const sql = "Select * from employee Where email = ?";
   con.query(sql, [req.body.email], (err, result) => {
@@ -30,7 +31,8 @@ router.post("/employeelogin", (req, res) => {
   });
 });
 
-/// Employee List
+////// GET Employee List FROM THE EMPLOYEE TABLE //////////
+/////// WITH INCLUDING SEARCH PAGE AND LIMIT ////////
 
 router.get("/", (req, res) => {
   const name = req.query.name;
@@ -69,7 +71,7 @@ router.get("/", (req, res) => {
   });
 });
 
-//// Get Particular Employee From the Employee List
+///////// Get Particular Employee From the Employee List ////
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
@@ -82,8 +84,8 @@ router.get("/:id", (req, res) => {
     }
   });
 });
-//////////////
-// Add new Employee
+///////////// Add new Employee  TO EMPLOYEE TABLE ////
+
 router.post("/add_employee", (req, res) => {
   let sql =
     "INSERT INTO employee (`name`, `dept_id`, `password`, `email`, `job_title`, `contact`, `DOB`,`DOJ`) values (?)";
@@ -109,9 +111,9 @@ router.post("/add_employee", (req, res) => {
     });
   });
 });
-//////////////////////////////////////////////
 
-///Submit the Edited Data
+//////////////Submit the Edited Data
+
 router.put("/edit_employee/:id", (req, res) => {
   const id = req.params.id;
   const sql = `UPDATE employee SET name=?,dept_id=?,email=?,job_title=?,
@@ -134,7 +136,8 @@ router.put("/edit_employee/:id", (req, res) => {
   });
 });
 
-///Submit the Edited Data
+///////////DELETE PARTICULAR EMPLOYEE FROM THE TABLE
+
 router.delete("/delete_employee/:id", (req, res) => {
   const id = req.params.id;
   const sql = `DELETE FROM employee WHERE id=?`;
@@ -147,7 +150,7 @@ router.delete("/delete_employee/:id", (req, res) => {
   });
 });
 
-////LOG OUT
+//// LOG OUT  EMPLOYEE  ///////////
 
 router.get("/logout", (req, res) => {
   res.clearCookie("token");

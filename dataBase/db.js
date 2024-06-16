@@ -7,7 +7,6 @@ const con = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
 con.connect(function (err) {
   if (err) {
     console.log("Error in onnection");
