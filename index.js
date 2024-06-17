@@ -22,7 +22,6 @@ app.use("/employee", EmployeeRouter);
 
 const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
-  console.log(token);
   if (token) {
     jwt.verify(token, "jwt_secret_key", (error, decoded) => {
       if (error) {
